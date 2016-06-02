@@ -1,6 +1,6 @@
 class DosesController < ApplicationController
   before_action :set_dose, only: [:show, :edit, :update, :destroy]
-
+  before_action :find_cocktail, only: [:new, :create]
   # GET /doses
   # GET /doses.json
   def index
@@ -24,11 +24,11 @@ class DosesController < ApplicationController
   # POST /doses
   # POST /doses.json
   def create
-    @dose = Dose.new(dose_params)
+    @dose = @cocktail.doses.build(dose_params)
 
     respond_to do |format|
       if @dose.save
-        format.html { redirect_to @dose, notice: 'Dose was successfully created.' }
+        format.html { redirect_to cocktail_path(@cocktail), notice: 'Dose was successfully created.' }
         format.json { render :show, status: :created, location: @dose }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class DosesController < ApplicationController
   def destroy
     @dose.destroy
     respond_to do |format|
-      format.html { redirect_to doses_url, notice: 'Dose was successfully destroyed.' }
+      format.html { redirect_to cocktail_path(@dose), notice: 'Dose was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,5 +70,9 @@ class DosesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def dose_params
       params.require(:dose).permit(:description, :ingredient_id, :cocktail_id)
+    end
+
+    def find_cocktail
+      @cocktail = Cocktail.find(params[:cocktail_id])
     end
 end
