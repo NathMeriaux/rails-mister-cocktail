@@ -1,7 +1,8 @@
 <h1>Cocktails</h1>
 
 <% @cocktails.each do |cocktail| %>
-  <%= link_to cocktail.name, cocktail_path(cocktail), {class: "btn btn-link"} %> <%= link_to "Moderate", cocktail_path(cocktail), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-link" %>
+  <%= image_tag cocktail.photo.url(:bright_face) %>
+  <%= link_to cocktail.name, cocktail_path(cocktail), {class: "btn btn-link"} %> <%= link_to "Delete", cocktail_path(cocktail), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-link" %>
   <br>
 <% end %>
 <br>

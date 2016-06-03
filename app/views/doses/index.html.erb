@@ -13,6 +13,7 @@
   </thead>
 
   <tbody>
+    <%= image_tag @product.photo.url(:bright_face) %>
     <% @doses.each do |dose| %>
       <tr>
         <td><%= dose.description %></td>

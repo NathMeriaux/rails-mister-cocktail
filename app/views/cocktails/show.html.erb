@@ -9,8 +9,9 @@
   <% end %>
 </h5>
 
+<%= cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill %>
 
 <%= link_to "Index", cocktails_path, {class: "btn btn-link"} %>
 <br>
-<h3>Add a new dose to your Cocktail (la grosse dose si possible)</h3>
+<h3>Add a new dose to your Cocktail</h3>
 <%= render "doses/form1" %>
